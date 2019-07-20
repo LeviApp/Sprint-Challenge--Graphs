@@ -48,6 +48,30 @@ class Stack():
 
 simplified_maze = {0: {1,3,5,7}, 1: {0,2}, 2: {1}, 3: {0,4}, 4: {3}, 5: {0,6}, 6: {5}, 7: {0, 8}, 8:{7}}
 
+
+def bfs(start,end):
+
+    breadth = Queue()
+    visited = []
+    breadth.enqueue([start])
+
+    while breadth.size():
+        path = breadth.dequeue()
+        node = path[-1]
+
+        if node not in visited:
+            visited.append(node)
+            if node == end:
+                print(path)
+                return path
+            
+            for connected_room in simplified_maze[node]:
+                new_path = path[:]
+                new_path.append(connected_room)
+                breadth.enqueue(new_path)
+
+bfs(3,5)
+
 def dft(starting_vertex):
     """
     Print each vertex in depth-first order
@@ -70,7 +94,9 @@ def dft(starting_vertex):
     print(visited)
 
 
-dft(5)
+
+
+
 # FILL THIS IN
 
 
